@@ -4,9 +4,7 @@
     <title>Hello</title>
 </head>
 <body>
-<div>Your expression: <%=request.getAttribute("expression")%></div><br/>
-
-<div>Result: <%=request.getAttribute("result")%> </div>
+<div>Error! <b><%=request.getAttribute("error")%></b></div><br/>
 
 
 </body>
