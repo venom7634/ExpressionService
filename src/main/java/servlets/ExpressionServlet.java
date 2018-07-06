@@ -1,6 +1,5 @@
 package servlets;
 
-
 import expression.Expression;
 import org.json.JSONObject;
 import parser.NotValidException;
@@ -25,11 +24,11 @@ public class ExpressionServlet extends HttpServlet {
         try {
             expression = ParserExpression.parseInitialExpression(expressionString);
         } catch (NotValidException e){
-            req.setAttribute("error",e.getMessage());
-            req.getRequestDispatcher("solution.jsp").forward(req, resp);
+            req.setAttribute("error", e.getMessage());
+            req.getRequestDispatcher("errors.jsp").forward(req, resp);
         }
 
-        result.put("value",expression.calculate());
+        result.put("value", expression.calculate());
         out.println(result);
     }
 }
