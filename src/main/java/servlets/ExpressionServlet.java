@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashMap;
 
 public class ExpressionServlet extends HttpServlet {
 
@@ -19,7 +18,7 @@ public class ExpressionServlet extends HttpServlet {
         PrintWriter out = resp.getWriter();
         String expressionString = req.getParameter("expression");
         Expression expression = null;
-        HashMap<String,Double> map = new HashMap<String,Double>();
+        JSONObjectByMR json = new JSONObjectByMR();
 
         try {
             expression = ParserExpression.parseInitialExpression(expressionString);
@@ -27,8 +26,10 @@ public class ExpressionServlet extends HttpServlet {
             req.setAttribute("error", e.getMessage());
             req.getRequestDispatcher("errors.jsp").forward(req, resp);
         }
-        map.put("value", expression.calculate());
-        out.println(map);
+
+        json.put("value", expression.calculate());
+        json.put("test", null);
+        out.println(json.toString());
 
     }
 }
