@@ -18,7 +18,7 @@ public class ExpressionServlet extends HttpServlet {
         PrintWriter out = resp.getWriter();
         String expressionString = req.getParameter("expression");
         Expression expression = null;
-        JSONObjectByMR json = new JSONObjectByMR();
+        JSONObject json = new JSONObject();
 
         try {
             expression = ParserExpression.parseInitialExpression(expressionString);

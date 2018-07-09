@@ -3,20 +3,20 @@ package servlets;
 import java.util.HashMap;
 import java.util.Map;
 
-public class JSONObjectByMR {
+public class JSONObject {
 
     HashMap<String,Object> map;
-    public JSONObjectByMR(){
+    public JSONObject(){
         this.map = new HashMap<String, Object>();
     }
 
     public String toString() {
-        String result = "{";
+        String result = "{ ";
         for(Map.Entry<String, Object> element : this.map.entrySet()){
             result+= "\""+element.getKey()+"\""+":"+valueString(element.getValue())+", ";
         }
         result = result.substring(0,result.length()-2);
-        result+= "}";
+        result+= " }";
         return result;
     }
 
