@@ -1,7 +1,6 @@
 package servlets;
 
 import expression.Expression;
-import org.json.JSONObject;
 import parser.NotValidException;
 import parser.ParserExpression;
 
@@ -11,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 
 public class ExpressionServlet extends HttpServlet {
 
@@ -18,8 +18,8 @@ public class ExpressionServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter out = resp.getWriter();
         String expressionString = req.getParameter("expression");
-        JSONObject result = new JSONObject();
         Expression expression = null;
+        HashMap<String,Double> map = new HashMap<String,Double>();
 
         try {
             expression = ParserExpression.parseInitialExpression(expressionString);
@@ -27,8 +27,8 @@ public class ExpressionServlet extends HttpServlet {
             req.setAttribute("error", e.getMessage());
             req.getRequestDispatcher("errors.jsp").forward(req, resp);
         }
+        map.put("value", expression.calculate());
+        out.println(map);
 
-        result.put("value", expression.calculate());
-        out.println(result);
     }
 }
